@@ -1,4 +1,5 @@
 import React from "react";
+import './App.css';
 
 type PropsType = {
     title: "inc" | "reset"
