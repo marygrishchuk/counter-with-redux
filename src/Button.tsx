@@ -1,20 +1,23 @@
 import React from "react";
 import './App.css';
+import {useDispatch} from "react-redux";
+import {changeDigit} from "./redux/counterReducer";
 
 type PropsType = {
     title: "inc" | "reset"
     disabled: boolean
-    changeDigit: (digit: number) => void
     digit: number
 }
 
 export function Button(props: PropsType) {
 
+    let dispatch = useDispatch()
+
     let onClickHandler = () => {
         if (props.title === "inc") {
-            props.changeDigit(props.digit + 1)
+            dispatch(changeDigit(props.digit + 1))
         } else if (props.title === "reset") {
-            props.changeDigit(0)
+            dispatch(changeDigit(0))
         }
     }
 
