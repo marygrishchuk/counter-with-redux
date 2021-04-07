@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Counter} from "./Counter";
 import {Button} from "./Button";
@@ -9,7 +9,24 @@ function App() {
     const [disabledInc, setDisabledInc] = useState<boolean>(false)
     const [disabledReset, setDisabledReset] = useState<boolean>(true)
 
-    function disableButton (digit: number) {
+    useEffect(() => {
+        let storedValue = Number(localStorage.getItem('counterValue'))
+        storedValue && setDigit(storedValue)
+        if (storedValue === 5) {
+            setDisabledInc(true)
+            setDisabledReset(false)
+        } else if (storedValue === 0) {
+            setDisabledInc(false)
+            setDisabledReset(true)
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('counterValue', JSON.stringify(digit))
+    }, [digit])
+
+    function changeDigit(digit: number) {
+        setDigit(digit)
         if (digit === 5) {
             setDisabledInc(true)
         } else if (digit === 0) {
@@ -18,11 +35,6 @@ function App() {
         } else {
             setDisabledReset(false)
         }
-    }
-
-    function changeDigit(digit: number) {
-        setDigit(digit)
-        disableButton(digit)
     }
 
     return (
