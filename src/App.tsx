@@ -1,19 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './App.css';
 import {Counter} from "./Counter";
 import {Button} from "./Button";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {AppRootStateType} from "./redux/store";
-import {CounterType, getCounterValue} from "./redux/counterReducer";
+import {CounterType} from "./redux/counter-reducer";
 
 function App() {
 
     let {digit, disabledInc, disabledReset} = useSelector<AppRootStateType, CounterType>(state => state.counter)
-    let dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(getCounterValue())
-    }, [])
 
     return (
         <div className="App3">

@@ -1,7 +1,7 @@
 import React from "react";
 import './App.css';
 import {useDispatch} from "react-redux";
-import {changeDigit} from "./redux/counterReducer";
+import {setDigit} from "./redux/counter-reducer";
 
 type PropsType = {
     title: "inc" | "reset"
@@ -15,9 +15,9 @@ export function Button(props: PropsType) {
 
     let onClickHandler = () => {
         if (props.title === "inc") {
-            dispatch(changeDigit(props.digit + 1))
+            dispatch(setDigit(props.digit + 1))
         } else if (props.title === "reset") {
-            dispatch(changeDigit(0))
+            dispatch(setDigit(0))
         }
     }
 
